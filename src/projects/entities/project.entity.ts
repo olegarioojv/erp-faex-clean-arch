@@ -19,7 +19,7 @@ export class Project {
     @Column({ nullable: true, type: 'datetime'})
     startedAt: Date | null;
 
-    @Column({ type: 'simple-enum'})
+    @Column({ enum: ProjectStatus, default: ProjectStatus.Pending })
     status: ProjectStatus;
 
     @Column({ type: 'datetime'})
@@ -27,5 +27,14 @@ export class Project {
 
     @Column()
     updatedAt: Date;
+
+    constructor (props: {
+        name: string;
+        startedAt?: Date | null;
+        finishedAt?: Date | null;
+    }, id?: string) {
+        Object.assign(this, props);
+        this.id = id ?? crypto.randomUUID();
+    }
 
 }
