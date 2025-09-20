@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
 export enum ProjectStatus {
@@ -19,7 +20,11 @@ export class Project {
     @Column({ nullable: true, type: 'datetime'})
     startedAt: Date | null;
 
-    @Column({ enum: ProjectStatus, default: ProjectStatus.Pending })
+    @Column({
+    type: 'enum',
+    enum: ProjectStatus,
+    default: ProjectStatus.Pending,
+  })
     status: ProjectStatus;
 
     @Column({ type: 'datetime'})
