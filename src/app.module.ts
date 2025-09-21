@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProjectsModule } from './projects/projects.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Project } from './projects/entities/project.entity';
-import { ProjectsService } from './projects/projects.service';
+import { Project } from './app/projects/entities/project.entity';
+import { ProjectsService } from './app/projects/projects.service';
+import { ProjectsModule } from './app/projects/projects.module';
 
 @Module({
   imports: [
@@ -17,9 +17,10 @@ import { ProjectsService } from './projects/projects.service';
       entities: [Project],
       synchronize: true, // True só ambiente de dev, false só ambiente de produção
       // autoLoadEntities: true, // Carrega entites registradas nos módulos
-    })
+    }),
+    ProjectsModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,],
 })
 export class AppModule {}
